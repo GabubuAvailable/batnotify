@@ -1,0 +1,27 @@
+#!/bin/sh
+# batnotify - a simple battery notificator
+
+while true; do
+	if cat /sys/class/power_supply/BAT0/capacity | grep -q -w "15" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 30000 'ATENTIE - batnotify' 'Baterie la 15%. Incarca laptop-ul.' &
+		beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n && sleep 59
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "10" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 15000 'ATENTIE - batnotify' 'Baterie la 10%! Te rog incarca laptop-ul acum!' &
+		beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 && sleep 29
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "5" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 30000 'AVERTIZARE - batnotify' 'Baterie la 5%! Incarca laptop-ul ACUM sau se v-a inchide la 3%!' &
+		beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 && sleep 4
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "3" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 59000 'AVERTIZARE - batnotify' 'Baterie la 3%! Laptop-ul se v-a inchide intr-un minut. Salveaza ce iti trebuie. Sau, incarca laptop-ul pentru al folosi in continuare.' &
+		beep -f 300 -D 150 -l 300 -n -f 250 -D 150 -l 300 -n -f 200 -l 1250 && sleep 60
+		if cat /sys/class/power_supply/BAT0/status | grep -q "Charging"; then
+			notify-send --urgency=normal -t 10000 'Incarcare - batnotify' 'Laptop-ul nu se v-a mai inchide.'
+		else
+			notify-send --urgency=critical -t 6000 'Te rog asteapta... - batnotify' 'Se inchide...' && sleep 5
+			/bin/shutdown now
+		fi
+	else
+		echo " " > NULL
+	fi
+	sleep 2
+done

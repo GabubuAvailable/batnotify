@@ -1,0 +1,157 @@
+#!/bin/bash
+# batnotify installer - made by Gabubu
+
+# Checking for root
+if whoami | grep -q 'root'; then
+
+# If oppened as root
+# Languages menu
+    CHOICE=$(whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --menu "Welcome!/Bun venit!" 10 55 0\
+    "English" "| Choose if you speak this language" \
+    "Romana" "| Alege daca vorbesti aceasta limba" 3>&1 1>&2 2>&3)
+
+# Romanian menu
+    if [ $CHOICE = "Romana" ]; then
+        whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --textbox "readme/readme_ro" 13 80
+        while true; do
+            CHOICE=$(whiptail --backtitle "Facut de Gabubu" --title "batnotify installer" --menu "Cu ce vrei sa incepi?" 10 55 0\
+            "Instalare" "| Instaleaza batnotify" \
+            "Dezinstalare" "| Dezinstaleaza batnotify" \
+            "Inchidere" "| Inchide installer-ul" 3>&1 1>&2 2>&3)
+            if [ $CHOICE = "Instalare" ]; then
+                if whiptail --backtitle "Facut de Gabubu" --title "batnotify installer" --yesno "Doresti sa instalati?" 7 30; then
+                    if which beep > /dev/null && echo $? | grep -q "0"; then
+                        COUNTER=0
+                        while [[ ${COUNTER} -le 100 ]]; do
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            cd src/
+                            sleep 1
+                            COUNTER=$(($COUNTER+20))
+                            chmod +x batnotify_ro
+                            sleep 1
+                            COUNTER=$(($COUNTER+20))
+                            cp batnotify_ro /bin/batnotify
+                            sleep 1
+                            COUNTER=$(($COUNTER+20))
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            sleep 2
+                            echo ${COUNTER}
+                        done | whiptail --gauge "Se instaleaza batnotify" 6 50 ${COUNTER}
+                        whiptail --msgbox "Instalat cu succes. Ce trebuie sa faci este ca batnotify sa se deschida automat si asta e tot. Acum urmeaza un mic ghid sa intelegi cum functioneaza ;)" 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n
+                        whiptail --msgbox "Aceasta sunet o sa cante cand bateria este la 15%. Apasa OK pentru a continua." 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100
+                        whiptail --msgbox "Aceasta sunet o sa cante cand bateria este la 10%. Apasa OK pentru a continua." 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100
+                        whiptail --msgbox "Aceasta sunet o sa cante cand bateria este la 5%. Apasa OK pentru a continua." 8 80
+                        beep -f 300 -D 150 -l 300 -n -f 250 -D 150 -l 300 -n -f 200 -l 1250
+                        whiptail --msgbox "Aceasta sunet o sa cante cand bateria este la 3%. Asta a fost tot." 8 80
+                        whiptail --msgbox "In timp ce acele beep-uri canta, o sa primiti si notificari." 8 80
+                        whiptail --msgbox "Iti multumesc ca ai instalat. Sper sa iti placa ce am facut :-)" 8 80
+                    else
+                        whiptail --backtitle "Facut de Gabubu" --title "batnotify installer - EROARE" --msgbox "Nu ai instalat "beep". Instaleaza acum!" 8 80
+                    fi
+                else
+                    beep
+                fi
+            elif [ $CHOICE = "Dezinstalare" ]; then
+                if whiptail --backtitle "Facut de Gabubu" --title "batnotify installer" --yesno "Doresti sa dezinstalezi?" 7 30; then
+                    whiptail --gauge "Se dezinstaleaza batnotify" 6 50 0 &
+                    sleep 1
+                    whiptail --gauge "Se dezinstaleaza batnotify" 6 50 50 &
+                    sleep 1
+                    whiptail --gauge "Se dezinstaleaza batnotify" 6 50 75 &
+                    rm /bin/batnotify
+                    sleep 1
+                    whiptail --gauge "Se dezinstaleaza batnotify" 6 50 100 &
+                    sleep 1
+                    whiptail --msgbox "Dezinstalat cu succes." 7 80
+                else
+                    beep
+                fi
+            else
+                exit
+            fi
+        done
+
+# English menu
+    elif [ $CHOICE = "English" ]; then
+        whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --textbox "readme/readme_en" 13 80
+        while true; do
+            CHOICE=$(whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --menu "What you want to start with?" 10 55 0\
+            "Install" "| Install batnotify" \
+            "Uninstall" "| Uninstall batnotify" \
+            "Exit" "| Close the installer" 3>&1 1>&2 2>&3)
+            if [ $CHOICE = "Install" ]; then
+                if whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --yesno "Do you want to install?" 7 30; then
+                    if which beep > /dev/null && echo $? | grep -q "0"; then
+                        COUNTER=0
+                        while [[ ${COUNTER} -le 100 ]]; do
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            cd src/
+                            COUNTER=$(($COUNTER+20))
+                            chmod +x batnotify_en
+                            COUNTER=$(($COUNTER+20))
+                            cp batnotify_en /bin/batnotify
+                            COUNTER=$(($COUNTER+20))
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            sleep 2
+                            echo ${COUNTER}
+                        done | whiptail --gauge "Installing batnotify" 6 50 ${COUNTER}
+                        whiptail --msgbox "Installed with success. What you need to do is to autostart-up this software and done. Now it's comming a small guide to understand how it works ;)" 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n
+                        whiptail --msgbox "This sound will play at 15%. Press OK to continue." 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100
+                        whiptail --msgbox "This sound will play at 10%. Press OK to continue." 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100
+                        whiptail --msgbox "This sound will play at 5%. Press OK to continue." 8 80
+                        beep -f 300 -D 150 -l 300 -n -f 250 -D 150 -l 300 -n -f 200 -l 1250
+                        whiptail --msgbox "This sound will play at 3%. Press OK to continue." 8 80
+                        whiptail --msgbox "While playing these beeps you'll receive notifications too." 8 80
+                        whiptail --msgbox "Thanks for installing. I hope you'll like what i've made :-)" 8 80
+                    else
+                        whiptail --backtitle "Facut de Gabubu" --title "batnotify installer - EROARE" --msgbox "Nu ai instalat "beep". Instaleaza acum!" 8 80
+                    fi
+                else
+                    beep
+                fi
+            elif [ $CHOICE = "Uninstall" ]; then
+                if whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --yesno "Do you want to uninstall?" 7 30; then
+                    whiptail --gauge "Uninstalling batnotify" 6 50 0 &
+                    sleep 1
+                    whiptail --gauge "Uninstalling batnotify" 6 50 50 &
+                    sleep 1
+                    whiptail --gauge "Uninstalling batnotify" 6 50 75 &
+                    rm /bin/batnotify
+                    sleep 1
+                    whiptail --gauge "Uninstalling batnotify" 6 50 100 &
+                    sleep 1
+                    whiptail --msgbox "Uninstalled with success." 7 80
+                else
+                    beep
+                fi
+            else
+                exit
+            fi
+        done
+# End of installer
+    else
+        exit
+    fi
+
+# If not openned as root
+else
+whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --msgbox "Please, run the installer as root." 7 38
+fi

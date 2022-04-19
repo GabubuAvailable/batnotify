@@ -1,0 +1,27 @@
+#!/bin/sh
+# batnotify - a simple battery notificator
+
+while true; do
+	if cat /sys/class/power_supply/BAT0/capacity | grep -q -w "15" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 30000 'WARNING - batnotify' 'Battery at 15%. Charge the laptop.' &
+		beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n && sleep 59
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "10" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 15000 'WARNING - batnotify' 'Battery at 10%! Please charge the laptop now!' &
+		beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 && sleep 29
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "5" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 30000 'CRITICAL WARNING - batnotify' 'Battery at 5%! Please charge the laptop NOW or it would shutdown at 3%!' &
+		beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 && sleep 4
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "3" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 59000 'ATTENTION - batnotify' 'Battery at 3%! The laptop will shutdown in 1 minute so make sure to save all you need. Or, charge the laptop to continue using it.' &	
+		beep -f 300 -D 150 -l 300 -n -f 250 -D 150 -l 300 -n -f 200 -l 1250 && sleep 60
+		if cat /sys/class/power_supply/BAT0/status | grep -q "Charging"; then
+			notify-send --urgency=normal -t 10000 'Charging - batnotify' 'The laptop will not shutdown.'
+		else
+			notify-send --urgency=critical -t 6000 'Please wait... - batnotify' 'Shutting down...' && sleep 5	
+			/bin/shutdown now
+		fi
+	else
+		echo " " > NULL
+	fi
+	sleep 2
+done

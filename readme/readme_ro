@@ -1,0 +1,2 @@
+Bun venit! Acesta este installer-ul batnotify. Acest installer te ajuta sa instalezi acest software in sistemul tau linux. Ce este batnotify? Este un software ce arata o notificare frumoasa cand bateria ta este descarcata. Plus, o sa cante niste beep-uri bios *foarte calme* cand apar notificarile (vor canta numai daca ai optiunea "bios beeps" activata). Este facut pentru utilizatorii ce folosesc un window manager (dwm, i3 sau openbox) si daca are dunst si beep instalat.
+Pentru mai multe informatii, ma poti intreba trimitand un email la gabubu@duck.com

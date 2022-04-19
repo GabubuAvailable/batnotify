@@ -1,0 +1,2 @@
+Welcome! This is the batnotify installer. This installer would help you to install this software on your linux system. What is batnotify? That's a software that shows a nice notification when your battery is low. Plus, it plays a *very calmy* bios beeps when showing the notifications (it plays only if you have the bios beeps enabled). This is made for users that use a window manager (dwm, i3 or openbox) and have dunst and beep installed.
+For more informations, you can ask me by sending an email at gabubu@duck.com
