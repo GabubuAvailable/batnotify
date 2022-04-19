@@ -15,7 +15,7 @@ Like it the title says. It shows a notification when the battery is low. Plus it
 
 ![error](https://user-images.githubusercontent.com/88589756/163953503-4cfe081e-63a6-4dbf-ba03-bdf60e7f9430.png)
 
-4: Choose the language (not your language here? you need to wait because still working about that.)
+4: Choose the language (not your language here? you can contribute by translating. check at bottom for more)
 
 ![language](https://user-images.githubusercontent.com/88589756/163954072-b77928f7-ce8c-46ef-b1ac-c684caa7e825.png)
 
@@ -39,3 +39,8 @@ Like it the title says. It shows a notification when the battery is low. Plus it
 4: Choose "Uninstall"
 
 5: That's it. You uninstalled batnotify. Now make sure to delete the batnotify from your .xinitrc or autostartup settings.
+
+## Do you want to translate?
+To contribute you need to download the file by [clicking here](https://raw.githubusercontent.com/GabubuAvailable/batnotify/main/translate%20submit) and completing.
+
+After that, create a new issue with this file and wait :)
