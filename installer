@@ -8,7 +8,8 @@ if whoami | grep -q 'root'; then
 # Languages menu
     CHOICE=$(whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --menu "Welcome!/Bun venit!" 10 55 0\
     "English" "| Choose if you speak this language" \
-    "Romana" "| Alege daca vorbesti aceasta limba" 3>&1 1>&2 2>&3)
+    "Romana" "| Alege daca vorbesti aceasta limba" \
+    "Français" "| choisissez si vous parlez le français" 3>&1 1>&2 2>&3)
 
 # Romanian menu
     if [ $CHOICE = "Romana" ]; then
@@ -55,7 +56,7 @@ if whoami | grep -q 'root'; then
                         whiptail --msgbox "In timp ce acele beep-uri canta, o sa primiti si notificari." 8 80
                         whiptail --msgbox "Iti multumesc ca ai instalat. Sper sa iti placa ce am facut :-)" 8 80
                     else
-                        whiptail --backtitle "Facut de Gabubu" --title "batnotify installer - EROARE" --msgbox "Nu ai instalat beep. Instaleaza acum!" 8 80
+                        whiptail --backtitle "Facut de Gabubu" --title "batnotify installer - EROARE" --msgbox "Nu ai instalat "beep". Instaleaza acum!" 8 80
                     fi
                 else
                     beep
@@ -117,12 +118,13 @@ if whoami | grep -q 'root'; then
                         whiptail --msgbox "This sound will play at 10%. Press OK to continue." 8 80
                         beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100
                         whiptail --msgbox "This sound will play at 5%. Press OK to continue." 8 80
-                        beep -f 300 -D 150 -l 300 -n -f 250 -D 150 -l 300 -n -f 200 -l 1250
+                        beep -f 300 -D 150 -l 300 -n -f 250 -D 150 -l 300 -n -f 200 -l 125
                         whiptail --msgbox "This sound will play at 3%. Press OK to continue." 8 80
                         whiptail --msgbox "While playing these beeps you'll receive notifications too." 8 80
                         whiptail --msgbox "Thanks for installing. I hope you'll like what i've made :-)" 8 80
-                    else
-                        whiptail --backtitle "Facut de Gabubu" --title "batnotify installer - EROARE" --msgbox "You don't have beep installed. Install now!" 8 80
+                    else 
+                     
+ ​                        whiptail --backtitle ​"​Made by Gabubu​"​ --title ​"​batnotify installer - ERROR" --msgbox ​"​You don't have beep installed. Install now!​"​ 8 80
                     fi
                 else
                     beep
@@ -146,12 +148,90 @@ if whoami | grep -q 'root'; then
                 exit
             fi
         done
+# If not openned as root
+else
+whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --msgbox "Please, run the installer as root." 7 38
+fi
+        
+# End of installer
+    else
+        exit
+    fi        
+        
+# French menu
+    elif [ $CHOICE = "Français" ]; then
+        whiptail --backtitle "Création par Gabubu" --title "Installeur de batnotify" --textbox "readme/readme_fr" 13 80
+        while true; do
+            CHOICE=$(whiptail --backtitle "Création par Gabubu" --title "Installeur de batnotify" --menu "Par quoi vous voulez commencer?" 10 55 0\
+            "Install" "| Installé batnotify" \
+            "Uninstall" "| Deinstallé batnotify" \
+            "Exit" "| Quittez L'installeur" 3>&1 1>&2 2>&3)
+            if [ $CHOICE = "Install" ]; then
+                if whiptail --backtitle "Creation par Gabubu" --title "Installeur de batnotify" --yesno "Vous voulez qu'on installe?" 7 30; then
+                    if which beep > /dev/null && echo $? | grep -q "0"; then
+                        COUNTER=0
+                        while [[ ${COUNTER} -le 100 ]]; do
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            cd src/
+                            COUNTER=$(($COUNTER+20))
+                            chmod +x batnotify_fr
+                            COUNTER=$(($COUNTER+20))
+                            cp batnotify_fr /bin/batnotify
+                            COUNTER=$(($COUNTER+20))
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            sleep 2
+                            echo ${COUNTER}
+                        done | whiptail --gauge "Installation de Batnotify" 6 50 ${COUNTER}
+                        whiptail --msgbox "Installé avec succès. Vous avez qu'a auto-démarrer ce program et fini. Maintenant un guide pour montrer comment ça marche ;)" 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n
+                        whiptail --msgbox "Ce bruit vas se jouer quant votre batterie est 15%. Appuyez sur Ok pour continuer." 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100
+                        whiptail --msgbox "Ce bruit vas se jouer quant votre batterie est 10%. Appuyez sur Ok pour continuer." 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100
+                        whiptail --msgbox "Ce bruit vas se jouer quant votre batterie est 5%. Appuyez sur Ok pour continuer." 8 80
+                        beep -f 300 -D 150 -l 300 -n -f 250 -D 150 -l 300 -n -f 200 -l 1250
+                        whiptail --msgbox "Ce bruit vas se jouer quant votre batterie est 3%. Appuyez sur Ok pour continuer." 8 80
+                        whiptail --msgbox "En jouant ces beeps, on n'envoie des notifications aussi :)" 8 80
+                        whiptail --msgbox "Merci pour installer batnotify, j'espère que vous aimais mon travail :-)" 8 80
+                    else
+                    
+                    whiptail --backtitle ​"​Création de Gabubu​"​ --title ​"​Installeur de batnotify - ERROR"​ --msgbox ​"​Vous n'avez pas beep installé. Installé le maintenant!​"​ 8 80
+               fi       
+                else
+                    beep
+                fi
+            elif [ $CHOICE = "Uninstall" ]; then
+                if whiptail --backtitle "Creation par Gabubu" --title "Installeur de batnotify" --yesno "Vous voulez Deinstallé?" 7 30; then
+                    whiptail --gauge "Deinstallation de batnotify" 6 50 0 &
+                    sleep 1
+                    whiptail --gauge "Deinstallation de batnotify" 6 50 0 &
+                    sleep 1
+                    whiptail --gauge "Deinstallation de batnotify" 6 50 75 &
+                    rm /bin/batnotify
+                    sleep 1
+                    whiptail --gauge "Deinstallation de batnotify" 6 50 100 &
+                    sleep 1
+                    whiptail --msgbox "Desinstallation avec succès" 7 80
+                else
+                    beep
+                fi
+            else
+                exit
+            fi
+        done
 # End of installer
     else
         exit
     fi
 
+
 # If not openned as root
 else
-whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --msgbox "Please, run the installer as root." 7 38
+whiptail --backtitle "Création par Gabubu" --title "Installeur de batnotify" --msgbox "s'il vous plaît, veuillez faire démarrer l'installeur comme root." 7 38
 fi
