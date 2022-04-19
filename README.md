@@ -1,5 +1,5 @@
 # batnotify
-A simple but nice battery notification.
+A simple but nice battery notifier.
 
 ![demo](https://user-images.githubusercontent.com/88589756/163951992-9a9a0b6b-242e-46ac-a7d6-a85a3b350d97.png)
 
