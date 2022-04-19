@@ -122,7 +122,7 @@ if whoami | grep -q 'root'; then
                         whiptail --msgbox "While playing these beeps you'll receive notifications too." 8 80
                         whiptail --msgbox "Thanks for installing. I hope you'll like what i've made :-)" 8 80
                     else
-                        whiptail --backtitle "Facut de Gabubu" --title "batnotify installer - EROARE" --msgbox "You don't have beep installed. Install now!" 8 80
+                        whiptail --backtitle "Made by Gabubu" --title "batnotify installer - ERROR" --msgbox "You don't have beep installed. Install now!" 8 80
                     fi
                 else
                     beep

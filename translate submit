@@ -1,0 +1,66 @@
+####################################################
+##################### batnotify ####################
+####################################################
+########## Translation into your language ##########
+#################### submit file ###################
+####################################################
+Welcome! What you need to do here? That's simple.
+Translate the following words/sentenses and then
+create a new issue with this translated file.
+The translation will start after this sentense.
+Good luck!
+####################################################
+####################################################
+##################### Installer ####################
+################### Languages menu #################
+####################################################
+Welcome! =
+English = "here type your language"
+Choose if you speak this language =
+
+####################################################
+##################### Main Menu ####################
+####################################################
+Made by Gabubu =
+What you want to start with? =
+Install | Install batnotify =
+Uninstall | Uninstall batnotify =
+Exit | Close the installer =
+
+####################################################
+################# Installing menu ##################
+####################################################
+Do you want to install? =
+Installing batnotify =
+Installed with success. What you need to do is to autostart-up this software and done. Now it's comming a small guide to understand how it works ;) =
+This sound will play at 15%. Press OK to continue. =
+This sound will play at 10%. Press OK to continue. =
+This sound will play at 5%. Press OK to continue. =
+This sound will play at 3%. Press OK to continue. =
+While playing these beeps you'll receive notifications too. =
+Thanks for installing. I hope you'll like what i've made :-) =
+ERROR | You don't have beep installed. Install now! =
+
+####################################################
+################ Uninstalling menu #################
+####################################################
+Do you want to uninstall? =
+Uninstalling batnotify =
+Uninstalled with success. =
+
+####################################################
+####################################################
+################# batnotify itself #################
+####################################################
+WARNING | Battery at 15%. Charge the laptop. =
+WARNING | Battery at 10%! Please charge the laptop now! =
+CRITICAL WARNING | Battery at 5%! Please charge the laptop NOW or it would shutdown at 3%! =
+ATTENTION | Battery at 3%! The laptop will shutdown in 1 minute so make sure to save all you need. Or, charge the laptop to continue using it. =
+Charging | The laptop will not shutdown. =
+Please wait... | Shutting down... =
+
+####################################################
+####################################################
+#################### readme file ###################
+####################################################
+Welcome! This is the batnotify installer. This installer would help you to install this software on your linux system. What is batnotify? That's a software that shows a nice notification when your battery is low. Plus, it plays a *very calmy* bios beeps when showing the notifications (it plays only if you have the bios beeps enabled). This is made for users that use a window manager (dwm, i3 or openbox) and have dunst and beep installed. For more informations, you can ask me by sending an email at gabubu@duck.com =
