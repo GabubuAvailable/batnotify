@@ -7,7 +7,9 @@ A simple but nice battery notification.
 Like it the title says. It shows a notification when the battery is low. Plus it plays a nice beep bios sounds when showing the notifications.
 
 ## How can I install it?
-1: Make sure you have a notification daemon (dunst for example) and beep installed. Otherwhise it won't work
+1: Make sure you have a notification daemon (dunst for example) and beep installed. Otherwhise it won't work. And check if the beep bios sounds is enabled from bios and is unmuted from alsamixer.
+
+![aslamixer](https://user-images.githubusercontent.com/88589756/164026277-bebeae52-a97a-4ffd-bb9f-796fc05d1f13.png)
 
 2: You need to download the installer by using `git clone https://github.com/GabubuAvailable/batnotify.git && cd batnotify` command;
 
