@@ -1,0 +1,27 @@
+#!/bin/sh
+# batnotify - a simple battery notificator
+
+while true; do
+	if cat /sys/class/power_supply/BAT0/capacity | grep -q -w "15" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 30000 'WARNING - batnotify' 'Batterie est 15%, S'il vous plaît rechargé votre laptop.' &
+		beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n && sleep 59
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "10" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 15000 'WARNING - batnotify' 'Batterie est 10%! S'il vous plaît rechargé votre laptop maintenant!' &
+		beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 && sleep 29
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "5" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 30000 'CRITICAL WARNING - batnotify' 'Batterie est 5%! S'il vous plaît recharger votre laptop MAINTENANT ou il vas s'éteindre a 3%!' &
+		beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 && sleep 4
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "3" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 59000 'ATTENTION - batnotify' 'Batterie est 3%! le laptop vas s'éteindre dans 1 minute alors vais sure que vous sauvegarder tous vos besoins. Ou, chargé le laptop pour continuer son utilisation.' &	
+		beep -f 300 -D 150 -l 300 -n -f 250 -D 150 -l 300 -n -f 200 -l 1250 && sleep 60
+		if cat /sys/class/power_supply/BAT0/status | grep -q "Charging"; then
+			notify-send --urgency=normal -t 10000 'Se chargé - batnotify' 'le laptop ne va pas s'éteindre.'
+		else
+			notify-send --urgency=critical -t 6000 'Veuillez attendre... - batnotify' 'entrain de s'étendre...' && sleep 5	
+			/bin/shutdown now
+		fi
+	else
+		echo " " > NULL
+	fi
+	sleep 2
+done
