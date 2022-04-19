@@ -6,9 +6,10 @@ if whoami | grep -q 'root'; then
 
 # If oppened as root
 # Languages menu
-    CHOICE=$(whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --menu "Welcome!/Bun venit!" 10 55 0\
+    CHOICE=$(whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --menu "Welcome!/Bun venit!/Bienvenue!" 10 55 0\
     "English" "| Choose if you speak this language" \
-    "Romana" "| Alege daca vorbesti aceasta limba" 3>&1 1>&2 2>&3)
+    "Romana" "| Alege daca vorbesti aceasta limba" \
+    "Francais" "| Choisissez si vous parlez le francais" 3>&1 1>&2 2>&3)
 
 # Romanian menu
     if [ $CHOICE = "Romana" ]; then
@@ -38,7 +39,7 @@ if whoami | grep -q 'root'; then
                             cp batnotify_ro /bin/batnotify
                             sleep 1
                             COUNTER=$(($COUNTER+20))
-                            sleep 1
+                            modprobe pcspkr
                             COUNTER=$(($COUNTER+10))
                             sleep 2
                             echo ${COUNTER}
@@ -105,7 +106,7 @@ if whoami | grep -q 'root'; then
                             COUNTER=$(($COUNTER+20))
                             cp batnotify_en /bin/batnotify
                             COUNTER=$(($COUNTER+20))
-                            sleep 1
+                            modprobe pcspkr
                             COUNTER=$(($COUNTER+10))
                             sleep 2
                             echo ${COUNTER}
@@ -139,6 +140,73 @@ if whoami | grep -q 'root'; then
                     whiptail --gauge "Uninstalling batnotify" 6 50 100 &
                     sleep 1
                     whiptail --msgbox "Uninstalled with success." 7 80
+                else
+                    beep
+                fi
+            else
+                exit
+            fi
+        done
+
+# French menu
+    elif [ $CHOICE = "Francais" ]; then
+        whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --textbox "readme/readme_fr" 13 80
+        while true; do
+            CHOICE=$(whiptail --backtitle "Création par Gabubu" --title "batnotify installer" --menu "Par quoi vous voulez commencer?" 10 55 0\
+            "Installe" "| Installe batnotify" \
+            "Deinstalle" "| Deinstalle batnotify" \
+            "Quitter" "| Quittez L'installeur" 3>&1 1>&2 2>&3)
+            if [ $CHOICE = "Installe" ]; then
+                if whiptail --backtitle "Création par Gabubu" --title "batnotify installer" --yesno "Vous voulez qu'on installe?" 7 33; then
+                    if which beep > /dev/null && echo $? | grep -q "0"; then
+                        COUNTER=0
+                        while [[ ${COUNTER} -le 100 ]]; do
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            cd src/
+                            COUNTER=$(($COUNTER+20))
+                            chmod +x batnotify_fr
+                            COUNTER=$(($COUNTER+20))
+                            cp batnotify_fr /bin/batnotify
+                            COUNTER=$(($COUNTER+20))
+                            modprobe pcspkr
+                            COUNTER=$(($COUNTER+10))
+                            sleep 2
+                            echo ${COUNTER}
+                        done | whiptail --gauge "Installation de Batnotify" 6 50 ${COUNTER}
+                        whiptail --msgbox "Installe avec succes. Vous avez qu'a auto-demarrer ce program et fini. Maintenant un guide pour montrer comment ca marche ;)" 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n
+                        whiptail --msgbox "Ce bruit vas se jouer quant votre batterie est 15%. Appuyez sur Ok pour continuer." 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100
+                        whiptail --msgbox "Ce bruit vas se jouer quant votre batterie est 10%. Appuyez sur Ok pour continuer." 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100
+                        whiptail --msgbox "Ce bruit vas se jouer quant votre batterie est 5%. Appuyez sur Ok pour continuer." 8 80
+                        beep -f 300 -D 150 -l 300 -n -f 250 -D 150 -l 300 -n -f 200 -l 1250
+                        whiptail --msgbox "Ce bruit vas se jouer quant votre batterie est 3%. Appuyez sur Ok pour continuer." 8 80
+                        whiptail --msgbox "En jouant ces beeps, on n'envoie des notifications aussi. :)" 8 80
+                        whiptail --msgbox "Merci pour installer batnotify, j'espere que vous aimais mon travail :-)" 8 80
+                    else
+                        whiptail --backtitle "Création par Gabubu" --title "batnotify installer - ERREUR" --msgbox "​Vous n'avez pas beep installe. Installe le maintenant!" 8 80
+                    fi
+                else
+                    beep
+                fi
+            elif [ $CHOICE = "Deinstalle" ]; then
+                if whiptail --backtitle "Création par Gabubu" --title "batnotify installer" --yesno "Vous voulez Deinstalle?" 7 30; then
+                    whiptail --gauge "Deinstallation de batnotify" 6 50 0 &
+                    sleep 1
+                    whiptail --gauge "Deinstallation de batnotify" 6 50 50 &
+                    sleep 1
+                    whiptail --gauge "Deinstallation de batnotify" 6 50 75 &
+                    rm /bin/batnotify
+                    sleep 1
+                    whiptail --gauge "Deinstallation de batnotify" 6 50 100 &
+                    sleep 1
+                    whiptail --msgbox "Desinstallation avec succes." 7 80
                 else
                     beep
                 fi
