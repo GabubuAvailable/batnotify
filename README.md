@@ -46,3 +46,7 @@ Like it the title says. It shows a notification when the battery is low. Plus it
 To contribute you need to download the file by [clicking here](https://raw.githubusercontent.com/GabubuAvailable/batnotify/main/translate%20submit) and completing.
 
 After that, create a new issue with this file and wait :)
+
+## Thanks to:
+- Me for creating this lol
+- Damaj301damaj for French translation
