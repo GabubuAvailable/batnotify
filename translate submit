@@ -56,7 +56,7 @@ WARNING | Battery at 15%. Charge the laptop. =
 WARNING | Battery at 10%! Please charge the laptop now! =
 CRITICAL WARNING | Battery at 5%! Please charge the laptop NOW or it would shutdown at 3%! =
 ATTENTION | Battery at 3%! The laptop will shutdown in 1 minute so make sure to save all you need. Or, charge the laptop to continue using it. =
-ATTENTION | Battery at 1%! The laptop will shutdown NOW!
+ATTENTION | Battery at 1%! The laptop will shutdown NOW! =
 Charging | The laptop will not shutdown. =
 Please wait... | Shutting down... =
 
