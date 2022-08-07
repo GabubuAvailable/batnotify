@@ -50,7 +50,7 @@ while true; do
 		beep -f 300 -D 150 -l 300 -n -f 250 -D 150 -l 300 -n -f 200 -l 1250 && sleep 5
 		/bin/shutdown now
 	else
-		echo " " > NULL
+		echo " " > /dev/null
 	fi
 	sleep 2
 done
