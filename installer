@@ -6,10 +6,11 @@ if whoami | grep -q 'root'; then
 
 # If oppened as root
 # Languages menu
-    CHOICE=$(whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --menu "Welcome!/Bun venit!/Bienvenue!" 10 55 0\
+    CHOICE=$(whiptail --backtitle "Made by Gabubu" --title "batnotify installer" --menu "Welcome!/Bun venit!/Bienvenue!/Hoşgeldiniz!" 10 55 0\
     "English" "| Choose if you speak this language" \
     "Romana" "| Alege daca vorbesti aceasta limba" \
-    "Francais" "| Choisissez si vous parlez le francais" 3>&1 1>&2 2>&3)
+    "Francais" "| Choisissez si vous parlez le francais" 3>&1 1>&2 2>&3 \
+    "Türkçe" "| Bu dili konuşuyorsanız seçin" )
 
 # Romanian menu
     if [ $CHOICE = "Romana" ]; then
@@ -214,6 +215,73 @@ if whoami | grep -q 'root'; then
                 exit
             fi
         done
+# Turkish menu
+    elif [ $CHOICE = "Türkçe" ]; then
+        whiptail --backtitle "Gabubu tarafından yapılmıştır" --title "batnotify kurucusu" --textbox "readme/readme_tr" 13 80
+        while true; do
+            CHOICE=$(whiptail --backtitle "Gabubu tarafından yapılmıştır" --title "batnotify kurucusu" --menu "Ne yapmak istersiniz?" 10 55 0\
+            "Kur" "| batnotify'ı kur" \
+            "Kaldır" "| batnotify'ı kaldır" \
+            "Çık" "| Kurulumdan çık" 3>&1 1>&2 2>&3)
+            if [ $CHOICE = "Kur" ]; then
+                if whiptail --backtitle "Gabubu tarafından yapılmıştır" --title "batnotify kurucusu" --yesno "Kurmak ister misiniz?" 7 30; then
+                    if which beep > /dev/null && echo $? | grep -q "0"; then
+                        COUNTER=0
+                        while [[ ${COUNTER} -le 100 ]]; do
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            sleep 1
+                            COUNTER=$(($COUNTER+10))
+                            cd src/
+                            COUNTER=$(($COUNTER+20))
+                            chmod +x batnotify_tr
+                            COUNTER=$(($COUNTER+20))
+                            cp batnotify_tr /bin/batnotify
+                            COUNTER=$(($COUNTER+20))
+                            modprobe pcspkr
+                            COUNTER=$(($COUNTER+10))
+                            sleep 2
+                            echo ${COUNTER}
+                        done | whiptail --gauge "batnotify kuruluyor" 6 50 ${COUNTER}
+                        whiptail --msgbox "Başarıyla kuruldu. Şimdi yapmanız gereken bu yazılımı otomatik başlatmak ve işiniz bitti! Şimdi de nasıl çalıştığını anlamak için kısa bir rehber ;)" 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n
+                        whiptail --msgbox "Bu ses %15'de oynatılacak. Devam etmek için OK'a basın." 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100
+                        whiptail --msgbox "Bu ses %10'de oynatılacak. Devam etmek için OK'a basın." 8 80
+                        beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100
+                        whiptail --msgbox "Bu ses %5'de oynatılacak. Devam etmek için OK'a basın." 8 80
+                        beep -f 300 -D 150 -l 300 -n -f 250 -D 150 -l 300 -n -f 200 -l 1250
+                        whiptail --msgbox "Bu ses %3'de oynatılacak. Devam etmek için OK'a basın." 8 80
+                        whiptail --msgbox "Bu bipleri duyarken bildirimler de alacaksınız." 8 80
+                        whiptail --msgbox "Kurduğunuz için teşekkürler. Umarım yaptığımı beğenmişsinizdir :-)" 8 80
+                    else
+                        whiptail --backtitle "Gabubu tarafından yapılmıştır" --title "batnotify kurucusu - HATA" --msgbox "beep kurulu değil. Hemen kurun!" 8 80
+                    fi
+                else
+                    beep
+                fi
+            elif [ $CHOICE = "Kaldır" ]; then
+                if whiptail --backtitle "Gabubu tarafından yapılmıştır" --title "batnotify kurucusu" --yesno "Kaldırmak istediğinizden emin misiniz??" 7 30; then
+                    whiptail --gauge "batnotify kaldırılıyor" 6 50 0 &
+                    sleep 1
+                    whiptail --gauge "batnotify kaldırılıyor" 6 50 50 &
+                    sleep 1
+                    whiptail --gauge "batnotify kaldırılıyor" 6 50 75 &
+                    rm /bin/batnotify
+                    sleep 1
+                    whiptail --gauge "batnotify kaldırılıyor" 6 50 100 &
+                    sleep 1
+                    whiptail --msgbox "Başarıyla kaldırıldı." 7 80
+                else
+                    beep
+                fi
+            else
+                exit
+            fi
+        done
+
 # End of installer
     else
         exit

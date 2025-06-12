@@ -50,3 +50,4 @@ After that, create a new issue with this file and wait :)
 ## Thanks to:
 - Me for creating this lol
 - Damaj301damaj for French translation
+- sctech-tr for Turkish translation

@@ -1,0 +1,56 @@
+#!/bin/sh
+# batnotify - a simple battery notificator
+
+while true; do
+	if cat /sys/class/power_supply/BAT0/capacity | grep -q -w "15" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 30000 'UYARI - batnotify' 'Piliniz 15%. Bilgisayarınızı şarj edin.' &
+		beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n && sleep 59
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "14" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 15000 'UYARI - batnotify' 'Piliniz 14%! Lütfen bilgisayarı şimdi şarj edin!' && sleep 29
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "13" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 15000 'UYARI - batnotify' 'Piliniz 13%! Lütfen bilgisayarı şimdi şarj edin!' && sleep 29
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "12" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 15000 'UYARI - batnotify' 'Piliniz 12%! Lütfen bilgisayarı şimdi şarj edin!' && sleep 29
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "11" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 15000 'UYARI - batnotify' 'Piliniz 11%! Lütfen bilgisayarı şimdi şarj edin!' && sleep 29
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "10" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 15000 'UYARI - batnotify' 'Piliniz 10%! Lütfen bilgisayarı şimdi şarj edin!' &
+		beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 && sleep 29
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "9" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 15000 'UYARI - batnotify' 'Piliniz 9%! Lütfen bilgisayarı şimdi şarj edin!' && sleep 29
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "8" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 15000 'UYARI - batnotify' 'Piliniz 8%! Lütfen bilgisayarı şimdi şarj edin!' && sleep 29
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "7" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 15000 'UYARI - batnotify' 'Piliniz 7%! Lütfen bilgisayarı şimdi şarj edin!' && sleep 29
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "6" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 15000 'UYARI - batnotify' 'Piliniz 6%! Lütfen bilgisayarı şimdi şarj edin!' && sleep 29
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "5" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 5000 'KRİTİK UYARI - batnotify' 'Piliniz 5%! Lütfen bilgisayarı ŞİMDİ şarj edin ya da %3 seviyesinde kapatılacaktır!' &
+		beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 && sleep 4
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "4" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 5000 'KRİTİK UYARI - batnotify' 'Piliniz 4%! Lütfen bilgisayarı ŞİMDİ şarj edin ya da %3 seviyesinde kapatılacaktır!' &
+		beep -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 -n -f 500 -D 1 -l 100 -n -f 300 -D 100 -l 100 && sleep 4
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "3" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 59000 'DİKKAT - batnotify' 'Piliniz 3%! Bilgisayar 1 dakika içinde kapatılacaktır o yüzden her şeyi kaydedin. Veya, kullanmaya devam edebilmek için şarja takın.' &
+		beep -f 300 -D 150 -l 300 -n -f 250 -D 150 -l 300 -n -f 200 -l 1250 && sleep 60
+		if cat /sys/class/power_supply/BAT0/status | grep -q "Charging"; then
+			notify-send --urgency=normal -t 10000 'Şarj oluyor - batnotify' 'Bilgisayar kapanmayacaktır.'
+		else
+			notify-send --urgency=critical -t 6000 'Lütfen bekleyin... - batnotify' 'Kapatılıyor...' && sleep 5
+			/bin/shutdown now
+		fi
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "2" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 59000 'DİKKAT - batnotify' 'Piliniz 2%! Bilgisayar ŞİMDİ kapatılacaktır.' &
+		echo 'DİKKAT - batnotify' 'Piliniz 2%! Bilgisayar ŞİMDİ kapatılacaktır.' &
+		beep -f 300 -D 150 -l 300 -n -f 250 -D 150 -l 300 -n -f 200 -l 1250 && sleep 5
+		/bin/shutdown now
+	elif cat /sys/class/power_supply/BAT0/capacity | grep -q -w "1" && cat /sys/class/power_supply/BAT0/status | grep -q "Discharging"; then
+		notify-send --urgency=critical -t 59000 'DİKKAT - batnotify' 'Piliniz 1%! Bilgisayar ŞİMDİ kapatılacaktır.' &
+		echo 'Piliniz 1%! Bilgisayar ŞİMDİ kapatılacaktır.' &
+		beep -f 300 -D 150 -l 300 -n -f 250 -D 150 -l 300 -n -f 200 -l 1250 && sleep 5
+		/bin/shutdown now
+	else
+		echo " " > /dev/null
+	fi
+	sleep 2
+done
